@@ -1,53 +1,30 @@
-( () => { 
+import checkComplete from './components/checkComplete.js';
+import deleteIcon from './components/deleteIcon.js';
 
-const btn = document.querySelector("[data-form-btn]");
+const btn = document.querySelector('[data-form-btn]');
 
-const createTask = (evento) =>{
-    evento.preventDefault()
-    const input = document.querySelector("[ data-form-input]");
-    const value = input.value
-    const list = document.querySelector("[data-list]")
-    const task = document.createElement("li");
-    task.classList.add("card")
-    input.value = '';
-    console.log(checkComplete());
-    const taskContect = document.createElement("div")
-    
-    const taskTitle = document.createElement("span")
-    taskTitle.classList.add("task")
-    taskTitle.innerText = value
-    taskContect.appendChild(checkComplete())
-    taskContect.appendChild(taskTitle)
-    const contect = `
-            
-        <i class="fas fa-trash-alt trashIcon icon"></i> `
+const createTask = (evento) => {
+  evento.preventDefault();
+  const input = document.querySelector('[data-form-input]');
+  const value = input.value;
+  const list = document.querySelector('[data-list]');
+  const task = document.createElement('li');
+  task.classList.add('card');
+  input.value = '';
+  //backticks
+  const taskContent = document.createElement('div');
 
-    // task.innerHTML = contect;
-    task.appendChild(taskContect)
+  const titleTask = document.createElement('span');
+  titleTask.classList.add('task');
+  titleTask.innerText = value;
+  taskContent.appendChild(checkComplete());
+  taskContent.appendChild(titleTask);
+  // task.innerHTML = content;
 
-    list.appendChild(task)
-
-    console.log(contect);
+  task.appendChild(taskContent);
+  task.appendChild(deleteIcon());
+  list.appendChild(task);
 };
 
-console.log(btn);
-
-// arrow funtions  o funciones flechas 
-btn.addEventListener('click', createTask)
-
-const checkComplete = () =>{
-    const i = document.createElement('i')
-    i.classList.add("far", "fa-check-square", "icon");
-    i.addEventListener('click', completeTask)
-    return i
-}
-
-// Immediately invoked funtions expression IIFE
-const completeTask = (event) => {
-    const element = event.target;
-    element.classList.toggle('fas');
-    element.classList.toggle('completeIcon')
-    element.classList.toggle('far');
-}
-
-})()
+//Arrow functions o funciones anonimas
+btn.addEventListener('click', createTask);
